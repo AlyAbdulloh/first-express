@@ -40,5 +40,17 @@ module.exports = {
         } catch (err) {
             return res.status(500).json({message: err.message});
         }
+    },
+    show: async (req, res) => {
+        try {
+            const id = req.params.id;
+            const response = await user.findByPk(id, {
+               attribute: ['id', 'name', 'email', 'created_at', 'updated_at'] 
+            });
+
+            return res.status(200).json(response || {});
+        } catch (err) {
+            return res.status(500).json({message: err.message});
+        }
     }
 }
