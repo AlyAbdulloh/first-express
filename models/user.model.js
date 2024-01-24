@@ -28,12 +28,15 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false,
             defaultValue: DataTypes.NOW
           },
-          updates_at: {
+          updated_at: {
             type: DataTypes.DATE,
             field: 'updated_at',
             allowNull: false,
             defaultValue: DataTypes.NOW
           }
+    }, {
+        tableName: 'users',
+        underscored: true
     });
 
     return User;
