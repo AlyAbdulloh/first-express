@@ -89,5 +89,21 @@ module.exports = {
         } catch (err) {
             return res.status(500).json({message: err.message});
         }
+    },
+    destroy: async (req, res) => {
+        try {
+            const id = req.params.id;
+            let data = await user.findByPk(id);
+
+            if(!data){
+                return res.json({message: "Data not found"});
+            }
+
+            await data.destroy(id);
+
+            return res.status(200).json({message: "Data was deleted"});
+        } catch (err) {
+            return res.status(500).json({message: err.message});
+        }
     }
 }
