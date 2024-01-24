@@ -52,5 +52,42 @@ module.exports = {
         } catch (err) {
             return res.status(500).json({message: err.message});
         }
+    },
+    update: async (req, res) => {
+        try {
+            const id = req.params.id;
+
+            let data = await user.findByPk(id, {
+                attribute: ['id', 'name', 'email', 'password', 'created_at', 'updated_at']
+            });
+
+            if(!data){
+                return res.json({message: 'Data not found!'});
+            }
+
+            const schema = {
+                name: 'string|optional',
+                email: 'email|optional',
+                password: 'string|optional',
+            }
+
+            const validate = v.validate(req.body, schema);
+
+            if(validate.length){
+                return res
+                    .status(400)
+                    .json(validate);
+            }
+
+            const response = await data.update({
+                name: req.body.name,
+                email: req.body.email,
+                password: bcrypt.hashSync(req.body.password, 8),
+            });
+
+            return res.status(200).json(response);
+        } catch (err) {
+            return res.status(500).json({message: err.message});
+        }
     }
 }
