@@ -13,5 +13,32 @@ module.exports = {
         } catch (err) {
             return res.status(500).json({message: err.message});
         }
+    },
+    store: async (req, res) => {
+        try {
+            const schema = {
+                name: 'string',
+                email: 'email',
+                password: 'string',
+            }
+
+            const validate = v.validate(req.body, schema);
+
+            if(validate.length){
+                return res
+                    .status(400)
+                    .json(validate);
+            }
+
+            await user.create({
+                name: req.body.name,
+                email: req.body.email,
+                password: bcrypt.hashSync(req.body.password, 8),
+            });
+
+            return res.status(201).json({message: 'Data was inserted'});
+        } catch (err) {
+            return res.status(500).json({message: err.message});
+        }
     }
 }
