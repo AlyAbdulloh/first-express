@@ -100,7 +100,7 @@ module.exports = {
             let data = await user.findByPk(id);
 
             if(!data){
-                return res.json({message: "Data not found"});
+                return res.status(404).json({message: "Data not found"});
             }
 
             await data.destroy(id);
