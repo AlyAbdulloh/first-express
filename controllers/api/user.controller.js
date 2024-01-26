@@ -16,6 +16,8 @@ module.exports = {
     },
     store: async (req, res) => {
         try {
+
+            // data validated
             const schema = {
                 name: 'string',
                 email: 'email',
@@ -30,6 +32,7 @@ module.exports = {
                     .json(validate);
             }
 
+            // insert data
             await user.create({
                 name: req.body.name,
                 email: req.body.email,
@@ -43,11 +46,14 @@ module.exports = {
     },
     show: async (req, res) => {
         try {
+
+            //  get id and find the user by id
             const id = req.params.id;
             const response = await user.findByPk(id, {
                attribute: ['id', 'name', 'email', 'created_at', 'updated_at'] 
             });
 
+            // response when data not found
             if(!response){
                 return res.status(404).json({message: "Data not found!"});
             }
@@ -109,5 +115,5 @@ module.exports = {
         } catch (err) {
             return res.status(500).json({message: err.message});
         }
-    }
+    },
 }
