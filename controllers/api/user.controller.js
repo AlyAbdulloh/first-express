@@ -2,6 +2,7 @@ const Validator = require('fastest-validator');
 const { user } = require('./../../models');
 const v = new Validator();
 var bcrypt = require('bcryptjs');
+const { Op, where } = require("sequelize");
 
 module.exports = {
     index: async (req, res) => {
@@ -9,6 +10,7 @@ module.exports = {
             const response = await user.findAll({
                 attribute: ['id', 'name', 'email', 'created_at', 'updated_at'],
             });
+
             return res.status(200).json(response);
         } catch (err) {
             return res.status(500).json({message: err.message});
@@ -116,4 +118,26 @@ module.exports = {
             return res.status(500).json({message: err.message});
         }
     },
+    search: async (req, res) => {
+        try {
+            //find data by name
+            let data = await user.findAll({
+                where: {
+                    name: {
+                        [Op.like]: '%' + req.body.name+'%'
+                    }
+                }
+            });
+
+            // if data not found
+            if(data.length == 0){
+                return res.status(404).json({message: 'Data not found!'});
+            } 
+
+            return res.status(200).json(data);
+            // return json
+        } catch (err) {
+            return res.status(500).json({message: err.message});
+        }
+    }
 }

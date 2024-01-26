@@ -17,4 +17,7 @@ router.put('/users/:id', userController.update);
 //route delete
 router.delete('/users/:id', userController.destroy);
 
+//route search
+router.post('/search/', userController.search);
+
 module.exports = router;
