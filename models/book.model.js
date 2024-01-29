@@ -1,6 +1,3 @@
-const { DataTypes } = require("sequelize");
-const { sequelize } = require(".");
-
 module.exports = (sequelize, DataTypes) => {
     const Book = sequelize.define('book', {
         id: {
@@ -24,6 +21,18 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.INTEGER,
             allowNull: false,
             field: 'stock',
+          },
+          created_at: {
+            type: DataTypes.DATE,
+            field: 'created_at',
+            allowNull: false,
+            defaultValue: DataTypes.NOW
+          },
+          updated_at: {
+            type: DataTypes.DATE,
+            field: 'updated_at',
+            allowNull: false,
+            defaultValue: DataTypes.NOW
           }
     }, {
         tableName: 'books',

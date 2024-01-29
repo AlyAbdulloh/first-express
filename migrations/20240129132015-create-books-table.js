@@ -27,7 +27,20 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
         field: 'stock',
+      },
+      created_at: {
+        type: Sequelize.DATE,
+        field: 'created_at',
+        allowNull: false,
+        defaultValue: Sequelize.NOW
+      },
+      updated_at: {
+        type: Sequelize.DATE,
+        field: 'updated_at',
+        allowNull: false,
+        defaultValue: Sequelize.NOW
       }
+      
     })
   },
 

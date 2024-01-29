@@ -1,7 +1,9 @@
 var express = require('express');
 var router = express.Router();
 const userController = require('../controllers/api/user.controller');
+const bookController = require('../controllers/api/book.controller');
 
+// user route
 // route get all
 router.get('/users', userController.index);
 
@@ -20,4 +22,8 @@ router.delete('/users/:id', userController.destroy);
 //route search
 router.post('/search/', userController.search);
 
+
+//book route
+//get all
+router.get('/books', bookController.index);
 module.exports = router;

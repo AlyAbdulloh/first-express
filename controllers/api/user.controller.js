@@ -8,7 +8,7 @@ module.exports = {
     index: async (req, res) => {
         try {
             const response = await user.findAll({
-                attribute: ['id', 'name', 'email', 'created_at', 'updated_at'],
+                attributes: ['id', 'name', 'email', 'created_at', 'updated_at'],
             });
 
             return res.status(200).json(response);
@@ -52,7 +52,7 @@ module.exports = {
             //  get id and find the user by id
             const id = req.params.id;
             const response = await user.findByPk(id, {
-               attribute: ['id', 'name', 'email', 'created_at', 'updated_at'] 
+               attributes: ['id', 'name', 'email', 'created_at', 'updated_at'] 
             });
 
             // response when data not found
@@ -70,7 +70,7 @@ module.exports = {
             const id = req.params.id;
 
             let data = await user.findByPk(id, {
-                attribute: ['id', 'name', 'email', 'password', 'created_at', 'updated_at']
+                attributes: ['id', 'name', 'email', 'password', 'created_at', 'updated_at']
             });
 
             if(!data){
