@@ -26,4 +26,6 @@ router.post('/search/', userController.search);
 //book route
 //get all
 router.get('/books', bookController.index);
+
+router.get('/books/:id', bookController.show);
 module.exports = router;
