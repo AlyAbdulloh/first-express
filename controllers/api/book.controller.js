@@ -39,5 +39,33 @@ module.exports= {
         } catch (error) {
             return res.status(500).json({message: error.message});
         }
+    },
+
+    store: async (req, res) => {
+        try {
+            //validation
+            const schema = {
+                title: 'string',
+                category: 'string',
+            }
+
+            const validate = v.validate(req.body, schema);
+
+            if(validate.length){
+                return res.status(400).json(validate);
+            }
+
+            //insert
+            await book.create({
+                title: req.body.title,
+                category: req.body.category,
+                stock: req.body.stock,
+            });
+
+            //return json
+            return res.status(201).json({message: "Data was inserted"});
+        } catch (error) {
+            return res.status(500).json({message: error.message});
+        }
     }
 }

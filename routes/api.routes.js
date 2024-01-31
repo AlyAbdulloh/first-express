@@ -28,4 +28,6 @@ router.post('/search/', userController.search);
 router.get('/books', bookController.index);
 
 router.get('/books/:id', bookController.show);
+
+router.post('/books/', bookController.store);
 module.exports = router;
