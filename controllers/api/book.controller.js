@@ -21,5 +21,23 @@ module.exports= {
         } catch (err) {
             return res.status(500).json({message: err.message});
         }
+    },
+
+    show: async (req, res) => {
+        try {
+            //get data
+            let id = req.params.id;
+            const data = await book.findByPk(id);
+            
+            // if not found
+            if(!data){
+                return res.status(404).json({message: "Data not found!"});
+            }
+
+            // return json
+            return res.status(200).json(data);
+        } catch (error) {
+            return res.status(500).json({message: error.message});
+        }
     }
 }
