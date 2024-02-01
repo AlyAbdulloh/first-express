@@ -68,10 +68,10 @@ module.exports= {
             return res.status(500).json({message: error.message});
         }
     },
-    update: async (res, req) => {
+    update: async (req, res) => {
         try {
             //cek data
-            const id = req.params;
+            const id = req.params.id;
 
             let data = await book.findByPk(id);
             // if not found
@@ -81,8 +81,9 @@ module.exports= {
 
             // validate
             const schema = {
-                title: 'string',
-                category: 'string',
+                title: 'string|optional',
+                category: 'string|optional',
+                stock: 'integer|optional',
             }
 
             const validate = v.validate(req.body, schema);

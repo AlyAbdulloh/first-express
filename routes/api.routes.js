@@ -30,4 +30,6 @@ router.get('/books', bookController.index);
 router.get('/books/:id', bookController.show);
 
 router.post('/books/', bookController.store);
+
+router.put('/books/:id', bookController.update);
 module.exports = router;
