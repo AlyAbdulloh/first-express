@@ -80,10 +80,15 @@ module.exports= {
             }
 
             // validate
+            // const schema = {
+            //     title: 'string|optional',
+            //     category: 'string|optional',
+            //     // stock: 'integer|optional',
+            // }
             const schema = {
-                title: 'string|optional',
-                category: 'string|optional',
-                stock: 'integer|optional',
+                title: {type: "string", optional: true},
+                category: {type: "string", optional: true},
+                stock: {type: "number", optional: true, integer: true}
             }
 
             const validate = v.validate(req.body, schema);
