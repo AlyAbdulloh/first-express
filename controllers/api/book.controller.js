@@ -67,5 +67,43 @@ module.exports= {
         } catch (error) {
             return res.status(500).json({message: error.message});
         }
+    },
+    update: async (res, req) => {
+        try {
+            //cek data
+            const id = req.params;
+
+            let data = await book.findByPk(id);
+            // if not found
+            if(!data){
+                return res.status(404).json({message: "Data not found!"});
+            }
+
+            // validate
+            const schema = {
+                title: 'string',
+                category: 'string',
+            }
+
+            const validate = v.validate(req.body, schema);
+
+            if(validate.length){
+                return res.status(400).json(validate);
+            }
+
+            // update
+            const response = await data.update({
+                title: req.body.title,
+                category: req.body.category,
+                stock: req.body.stock
+            });
+
+
+            // return json
+            return res.status(200).json(response);
+        } catch (err) {
+            return res.status(500).json({message: err.message});
+        }
     }
+    
 }
