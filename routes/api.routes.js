@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 const userController = require('../controllers/api/user.controller');
 const bookController = require('../controllers/api/book.controller');
+const authController = require('../controllers/api/auth.controller');
 
 // user route
 // route get all
@@ -32,4 +33,11 @@ router.get('/books/:id', bookController.show);
 router.post('/books/', bookController.store);
 
 router.put('/books/:id', bookController.update);
+
+
+//auth
+router.post('/auth/register', authController.signup);
+// router.post('/auth/login', authController.signup);
+
+
 module.exports = router;
