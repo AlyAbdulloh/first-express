@@ -37,7 +37,7 @@ router.put('/books/:id', bookController.update);
 
 //auth
 router.post('/auth/register', authController.signup);
-// router.post('/auth/login', authController.signup);
+router.post('/auth/login', authController.signin);
 
 
 module.exports = router;
