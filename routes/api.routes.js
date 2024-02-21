@@ -37,6 +37,7 @@ router.put("/books/:id", bookController.update);
 //category
 router.get("/categories", categoryController.index);
 router.get("/countBooks", categoryController.getBooksCount);
+router.get("/categories/:id", categoryController.getById);
 
 //auth
 router.post("/auth/register", authController.signup);

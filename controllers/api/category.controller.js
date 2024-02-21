@@ -1,5 +1,6 @@
 const { Op, where } = require("sequelize");
 const db = require("../../models");
+const { response } = require("express");
 const Category = db.categories;
 const sequelize = db.sequelize;
 
@@ -9,6 +10,20 @@ module.exports = {
       const categories = await Category.findAll({ include: ["books"] });
 
       res.status(200).json(categories);
+    } catch (error) {
+      return res.status(500).json({ message: error.message });
+    }
+  },
+
+  getById: async (req, res) => {
+    try {
+      let id = req.params.id;
+
+      const category = await Category.findByPk(id, { include: ["books"] });
+
+      category != null
+        ? res.status(200).json(category)
+        : res.status(404).json({ message: "Data not found" });
     } catch (error) {
       return res.status(500).json({ message: error.message });
     }

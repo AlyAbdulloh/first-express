@@ -4,7 +4,6 @@ var bcrypt = require("bcryptjs");
 const { Op, where } = require("sequelize");
 const db = require("../../models");
 const Book = db.books;
-const Category = db.categories;
 
 module.exports = {
   index: async (req, res) => {
