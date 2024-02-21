@@ -1,43 +1,45 @@
-var express = require('express');
+var express = require("express");
 var router = express.Router();
-const userController = require('../controllers/api/user.controller');
-const bookController = require('../controllers/api/book.controller');
-const authController = require('../controllers/api/auth.controller');
+const userController = require("../controllers/api/user.controller");
+const bookController = require("../controllers/api/book.controller");
+const authController = require("../controllers/api/auth.controller");
+const categoryController = require("../controllers/api/category.controller");
 
 // user route
 // route get all
-router.get('/users', userController.index);
+router.get("/users", userController.index);
 
 //route get by id
-router.get('/users/:id', userController.show);
+router.get("/users/:id", userController.show);
 
 //route create data
-router.post('/users/', userController.store);
+router.post("/users/", userController.store);
 
 //route update data
-router.put('/users/:id', userController.update);
+router.put("/users/:id", userController.update);
 
 //route delete
-router.delete('/users/:id', userController.destroy);
+router.delete("/users/:id", userController.destroy);
 
 //route search
-router.post('/search/', userController.search);
-
+router.post("/search/", userController.search);
 
 //book route
 //get all
-router.get('/books', bookController.index);
+router.get("/books", bookController.index);
 
-router.get('/books/:id', bookController.show);
+router.get("/books/:id", bookController.show);
 
-router.post('/books/', bookController.store);
+router.post("/books/", bookController.store);
 
-router.put('/books/:id', bookController.update);
+router.put("/books/:id", bookController.update);
 
+//category
+router.get("/categories", categoryController.index);
+router.get("/countBooks", categoryController.getBooksCount);
 
 //auth
-router.post('/auth/register', authController.signup);
-router.post('/auth/login', authController.signin);
-
+router.post("/auth/register", authController.signup);
+router.post("/auth/login", authController.signin);
 
 module.exports = router;
