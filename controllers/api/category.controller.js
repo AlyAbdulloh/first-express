@@ -17,7 +17,7 @@ module.exports = {
   getBooksCount: async (req, res) => {
     try {
       let query =
-        "SELECT c.name, COUNT(b.category_id) AS jumlah_buku FROM books b INNER JOIN categories c ON b.category_id = c.id GROUP BY b.category_id";
+        "SELECT c.id, c.name, COUNT(b.category_id) AS num_of_books FROM books b INNER JOIN categories c ON b.category_id = c.id GROUP BY b.category_id";
 
       let [data, _] = await sequelize.query(query);
 
