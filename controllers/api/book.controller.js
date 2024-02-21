@@ -4,18 +4,27 @@ var bcrypt = require("bcryptjs");
 const { Op, where } = require("sequelize");
 const db = require("../../models");
 const Book = db.books;
-// const Category = db.categories;
+const Category = db.categories;
 
 module.exports = {
   index: async (req, res) => {
     try {
       //get all
-      const data = await Book.findAll({ include: ["category"] });
+      const data = await Book.findAll({
+        include: ["category"],
+        order: [["id", "DESC"]],
+      });
 
       //when data is empty
       if (data.length == 0) {
         return res.status(204).json({ message: "Data is Empty" });
       }
+
+      // let extractData = data.map((item) => ({
+      //   id: item.id,
+      //   title: item.title,
+      //   category_name: item.category,
+      // }));
       // return json
       return res.status(200).json(data);
     } catch (err) {
