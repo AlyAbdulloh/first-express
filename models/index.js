@@ -56,13 +56,13 @@ Object.keys(db).forEach((modelName) => {
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
-db.books = require("./book.model")(sequelize, Sequelize);
-db.categories = require("./categories.model")(sequelize, Sequelize);
+// db.books = require("./book.model")(sequelize, Sequelize);
+// db.categories = require("./categories.model")(sequelize, Sequelize);
 
-db.categories.hasMany(db.books, { as: "books" });
-db.books.belongsTo(db.categories, {
-  foreignKey: "category_id",
-  as: "category",
-});
+// db.categories.hasMany(db.books, { as: "books" });
+// db.books.belongsTo(db.categories, {
+//   foreignKey: "category_id",
+//   as: "category",
+// });
 
 module.exports = db;

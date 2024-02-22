@@ -14,6 +14,10 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         field: "title",
       },
+      category_id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
       stock: {
         type: DataTypes.INTEGER,
         allowNull: false,
@@ -37,6 +41,10 @@ module.exports = (sequelize, DataTypes) => {
       underscored: true,
     }
   );
+
+  Book.associate = function (models) {
+    Book.belongsTo(models.category, { foreignKey: "category_id" });
+  };
 
   return Book;
 };

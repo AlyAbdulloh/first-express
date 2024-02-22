@@ -3,14 +3,15 @@ const v = new Validator();
 var bcrypt = require("bcryptjs");
 const { Op, where } = require("sequelize");
 const db = require("../../models");
-const Book = db.books;
+const Book = db.book;
+const Category = db.category;
 
 module.exports = {
   index: async (req, res) => {
     try {
       //get all
       const data = await Book.findAll({
-        include: ["category"],
+        include: [{ model: Category }],
         order: [["id", "DESC"]],
       });
 
